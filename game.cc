@@ -1,5 +1,5 @@
 // File: game.cxx
-
+/// @file game.cc
 #include <cassert>    // Provides assert
 #include <climits>    // Provides INT_MAX and INT_MIN
 #include <iostream>   // Provides cin, cout
@@ -16,6 +16,17 @@ namespace main_savitch_14
 
 //*************************************************************************
 // PUBLIC MEMBER FUNCTIONS
+
+/**
+@brief the main gameplay loop
+@return HUMAN returns the winner of the game
+
+This function runs the entire game, setting the board, 
+looping through the turns, and determining the winner.
+It calls several other functions.
+
+@see display_status, make_human_move, make_computer_move
+*/
 
 game::who game::play( )
 // The play function should not be overridden. It plays one round of the
@@ -45,10 +56,24 @@ game::who game::play( )
 //*************************************************************************
 // OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
 
+/**
+@brief displays a message
+@param message -  a string
+*/
+
 void game::display_message(const string& message) const
 {
 	cout << message;
 }
+
+/**
+@brief obtains the user's move
+@return answer - a string containing the user's move
+
+Asks the user to input their move (asking by display_message) then returns that move
+
+@see display_message
+*/
 
 string game::get_user_move( ) const
 {
@@ -59,6 +84,15 @@ string game::get_user_move( ) const
 	getline(cin, answer);
 	return answer;
 }
+
+/**
+@brief determines which player has the advantage
+@return last_mover, next_mover, NEUTRAL - the computer, the player, or neither
+
+Uses evaluate to get a relative score, then uses that score to determine who is in the lead
+
+@see evaluate
+*/
 
 game::who game::winning()const {
 
@@ -76,6 +110,18 @@ game::who game::winning()const {
 
 //*************************************************************************
 // PRIVATE FUNCTIONS (these are the same for every game)
+
+/**
+@brief determines how the AI moves
+@param look_ahead, beat_this - two integers, look_ahead determines how many moves the AI will think ahead, beat_this will be used to keep track
+of the best move recursively
+@return best_value - returns the highest value found for a move
+
+Determines which move the AI will use by looking at all the possible moves using compute_moves,
+calling the evaluate function to assign a value to it, and recursively keeping track of that value for several turns.
+
+@see is_game_over, evaluate, eval_with_lookahead
+*/
 
 int game::eval_with_lookahead(int look_ahead, int beat_this)
 // Evaluate a board position with lookahead.
@@ -125,6 +171,14 @@ int game::eval_with_lookahead(int look_ahead, int beat_this)
 	return -best_value;
 }
 
+/**
+@brief makes a computer move
+
+Makes the move for the computer by computing every possible move and choosing the best using eval_with_lookahead
+
+@see eval_with_lookahead
+*/
+
 void game::make_computer_move( )
 {
 	queue<string> moves;
@@ -157,6 +211,14 @@ void game::make_computer_move( )
 	// Make the best move.
 	make_move(best_move);
 }
+
+/** 
+@brief makes a human move
+
+gets a move from the player using get_user_move, checks if its legal, and makes the move if it is
+
+@see get_user_move, display_message
+*/
 
 void game::make_human_move( ) {
 	string move;

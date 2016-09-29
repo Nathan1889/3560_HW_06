@@ -1,3 +1,4 @@
+///@file othello.h
 // Brock Ferrell
 // CS2401
 // November 23, 2015
@@ -22,6 +23,13 @@ public:
 	void display_status()const;
 	int evaluate()const;
 	bool is_game_over()const;
+	/**
+	@brief determines the legality of a move
+	@param move - a string containing the player's proposed move
+	@return bool - true means its legal, false means its not
+
+	This function runs a proposed move through the rules of othello to determine whether or not the player can make that move
+	*/	
 	bool is_legal(const string& move)const;
 	void make_move(const string& move);
 	void restart();

@@ -1,7 +1,8 @@
 CC = g++
 CFLAGS = -g -Wall
-all: build archive
+all: build Doc
 build: game
+Doc: html
 game: game.o main.o othello.o
 	$(CC) $(CFLAGS) *.o -o game
 %.o: %.cc %.h
@@ -11,6 +12,6 @@ othello.h: game.h colors.h piece.h
 main.o: main.cc othello.h game.h
 	$(CC) $(CFLAGS) -c main.cc
 clean:
-	rm -f *.o core *.out *.tmp *.core game *.tar 
-archive: 
-	-tar -cvzf HW5.tar colors.h game.cc othello.h othello.cc main.cc piece.h game.h makefile
+	rm -f *.o core *.out *.tmp *.core game *.tar -r html latex
+html: game
+	doxygen Doxyfile

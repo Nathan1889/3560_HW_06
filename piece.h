@@ -1,3 +1,4 @@
+///@file piece.h
 // Brock Ferrell
 // CS2401
 // November 23, 2015
@@ -20,7 +21,10 @@ public:
 			theColor = white;
 		}
 	}
-
+	/**
+	@brief determines if a piece is blank
+	@return bool - is theColor blank or not?
+	*/
 	bool is_blank()const {return theColor == blank;}
 	bool is_black()const {return theColor == black;}
 	bool is_white()const {return theColor == white;}

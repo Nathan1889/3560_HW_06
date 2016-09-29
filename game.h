@@ -1,5 +1,5 @@
 // File: game.h (part of the namespace main_savitch_14)
-
+///@file game.h
 
 #ifndef MAIN_SAVITCH_GAME
 #define MAIN_SAVITCH_GAME
@@ -60,10 +60,16 @@ protected:
 	virtual game* clone( ) const = 0;
 	// Compute all the moves that the next player can make:
 	virtual void compute_moves(std::queue<std::string>& moves) const = 0;
-	// Display the status of the current game:
+	// Display the status of the current game:	
 	virtual void display_status( ) const = 0;
 	// Evaluate a board position:
 	// NOTE: positive values are good for the computer.
+	/**
+	@brief computes how good a position is
+	@return returns a integer value of the advantage of the current board
+
+	Gives a numerical score to the current position of pieces on that board. The higher the value, the better for the computer
+	*/	
 	virtual int evaluate( ) const = 0;
 	// Return true if the current game is finished:
 	virtual bool is_game_over( ) const = 0;

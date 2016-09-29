@@ -1,3 +1,4 @@
+///@file othello.cc
 // Brock Ferrell
 // CS2401
 // November 23, 2015
@@ -48,6 +49,10 @@ void Othello::display_status()const
   cout << "\nEnter a move in the format(letter,number) (Ex: A3)" << endl;
 }
 
+/**
+@brief moves a piece
+@param move - a string containing the co-ordinates of the piece and where it should go
+*/
 void Othello::make_move(const string& move) {
 
   int c, r;
